@@ -1,19 +1,65 @@
+import intl from 'react-intl-universal'; 
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Layout, Menu, Icon } from 'antd';
+import IntlPolyfill from "intl";
 import './App.css';
 import './App.less';
 import './App.scss';
+import Intlexample from './intl-universal'
+
 
 const { SubMenu } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
 
+// For Node.js, common locales should be added in the application
+global.Intl = IntlPolyfill;
+require('intl/locale-data/jsonp/en.js');
+require('intl/locale-data/jsonp/zh.js');
+require('intl/locale-data/jsonp/fr.js');
+require('intl/locale-data/jsonp/ja.js');
+
+const SUPPOER_LOCALES = [
+  {
+    name: "English",
+    value: "en-US"
+  },
+  {
+    name: "简体中文",
+    value: "zh-CN"
+  },
+  {
+    name: "繁體中文",
+    value: "zh-TW"
+  },
+  {
+    name: "français",
+    value: "fr-FR"
+  },
+  {
+    name: "日本の",
+    value: "ja-JP"
+  }
+];
+
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    const currentLocale = SUPPOER_LOCALES[1].value; // Determine user's locale here
+    intl.init({
+      currentLocale,
+      locales: {
+        [currentLocale]: require(`./locales/${currentLocale}`)
+      }
+    });
+  }
+
   render() {
     return (
       <div className='app'>
         <Layout>
-          <Header>Header</Header>
+          <Header></Header>
           <Layout>
             <Sider>
               <Menu
@@ -42,7 +88,7 @@ class App extends Component {
                 </SubMenu>
               </Menu>
             </Sider>
-            <Content>Content</Content>
+            <Content><Intlexample /></Content>
           </Layout>
           <Footer>Footer</Footer>
         </Layout>
