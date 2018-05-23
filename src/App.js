@@ -24,6 +24,8 @@ require('intl/locale-data/jsonp/zh.js');
 require('intl/locale-data/jsonp/fr.js');
 require('intl/locale-data/jsonp/ja.js');
 
+
+
 const SUPPOER_LOCALES = [
   {
     name: "English",
