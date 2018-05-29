@@ -15,7 +15,11 @@ class Todolist {
       }
     })
   }
-
+  autorun(){
+    if (this.defaultVal === 'hunter') {
+      console.log('welcome')
+    }
+  }
   @computed get getInputLength () {
     return this.defaultVal.length
   }

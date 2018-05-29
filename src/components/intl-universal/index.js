@@ -11,11 +11,6 @@ export default class Intl extends Component {
     return (
       <div>
         <BasicComponent />
-        <PluralComponent />
-        <HtmlComponent />
-        <DateComponent />
-        <CurrencyComponent />
-        <MessageNotInComponent />
       </div>
     )
   }

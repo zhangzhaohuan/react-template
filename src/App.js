@@ -1,21 +1,40 @@
-import intl from 'react-intl-universal';
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { Provider } from 'mobx-react';
+import { observer, inject } from 'mobx-react'
 import logo from './logo.svg';
-import { Layout, Menu, Icon } from 'antd';
+import { setCookie, getCookie } from 'common/cookie.js'
+
+// antd国际化配置
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import en_US from 'antd/lib/locale-provider/en_US';
+
+// react-intl-universal国际化配置
+import intl from 'react-intl-universal';
 import IntlPolyfill from "intl";
+
+
+
+
+import Home from './components/home'
+import Login from './components/login'
+import Register from './components/register'
+import store from './store';
 import './App.css';
 import './App.less';
 import './App.scss';
-import Intlexample from './intl-universal';
-import { Provider } from 'mobx-react';
-import AddTodo from './components/addtodo.jsx'
-import ToggleList from './components/togglelist.jsx'
-import TodoList from './components/todolist.jsx'
-import store from './store';
 
-
-const { SubMenu } = Menu;
-const { Header, Footer, Sider, Content } = Layout;
+//universal国际化文件
+const intl_locales = {
+  "en-US": require("locales/en_US.json"),
+  "zh-CN": require("locales/zh_CN.json")
+}
+//antd国际化文件
+const antd_locales = {
+  "zh_CN": require("antd/lib/locale-provider/zh_CN"),
+  "en_US": require("antd/lib/locale-provider/en_US")
+}
 
 // For Node.js, common locales should be added in the application
 global.Intl = IntlPolyfill;
@@ -25,90 +44,59 @@ require('intl/locale-data/jsonp/fr.js');
 require('intl/locale-data/jsonp/ja.js');
 
 
-
-const SUPPOER_LOCALES = [
-  {
-    name: "English",
-    value: "en-US"
-  },
-  {
-    name: "简体中文",
-    value: "zh-CN"
-  },
-  {
-    name: "繁體中文",
-    value: "zh-TW"
-  },
-  {
-    name: "français",
-    value: "fr-FR"
-  },
-  {
-    name: "日本の",
-    value: "ja-JP"
-  }
-];
-
+@inject('intl')
+@observer
 class App extends Component {
-
   constructor(props) {
-
     super(props);
-    const currentLocale = SUPPOER_LOCALES[2].value; // Determine user's locale here
+    this.intl = this.props.intl;
+  }
+
+  componentWillMount() {
+    if (!getCookie('lang')) {
+      let lang = window.navigator.language;
+      if (lang == 'zh') lang = 'zh-CN';
+      setCookie("lang", lang);
+    }
+    this.loadLocales();
+  }
+
+  loadLocales = () => {
+    const lang = getCookie('lang');
+    console.log(lang);
+    // init method will load CLDR locale data according to currentLocale
+    // react-intl-universal is singleton, so you should init it only once in your app
+    const currentLocale = intl_locales[lang];
+    console.log(currentLocale);
     intl.init({
-      currentLocale,
+      currentLocale: lang,// TODO: determine locale here
       locales: {
-        [currentLocale]: require(`./locales/${currentLocale}`)
+        [lang]: currentLocale
       }
-    });
+    }).then(() => {
+      // After loading CLDR locale data, start to render
+      this.intl.lanFlag = !this.intl.lanFlag;
+      // window.location.reload();
+    })
   }
 
   render() {
+    const antd_locale = getCookie('lang').replace("-", "_");
+
+    const locale = antd_locales[antd_locale];
     return (
-      // <div className='app'>
-      //   <Layout>
-      //     <Header></Header>
-      //     <Layout>
-      //       <Sider>
-      //         <Menu
-      //           mode="inline"
-      //           defaultSelectedKeys={['1']}
-      //           defaultOpenKeys={['sub1']}
-      //           style={{ height: '100%', borderRight: 0 }}
-      //         >
-      //           <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-      //             <Menu.Item key="1">option1</Menu.Item>
-      //             <Menu.Item key="2">option2</Menu.Item>
-      //             <Menu.Item key="3">option3</Menu.Item>
-      //             <Menu.Item key="4">option4</Menu.Item>
-      //           </SubMenu>
-      //           <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-      //             <Menu.Item key="5">option5</Menu.Item>
-      //             <Menu.Item key="6">option6</Menu.Item>
-      //             <Menu.Item key="7">option7</Menu.Item>
-      //             <Menu.Item key="8">option8</Menu.Item>
-      //           </SubMenu>
-      //           <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
-      //             <Menu.Item key="9">option9</Menu.Item>
-      //             <Menu.Item key="10">option10</Menu.Item>
-      //             <Menu.Item key="11">option11</Menu.Item>
-      //             <Menu.Item key="12">option12</Menu.Item>
-      //           </SubMenu>
-      //         </Menu>
-      //       </Sider>
-      //       <Content><Intlexample /></Content>
-      //     </Layout>
-      //     <Footer>Footer</Footer>
-      //   </Layout>
-      // </div>
-      <div className="todo-app">
-        <Provider {...store} >
+      <div className='app'>
+        <LocaleProvider locale={locale}>
           <div>
-            <AddTodo />
-            <ToggleList />
-            <TodoList />
+            <Router>
+              <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route path="/" component={Home} />
+              </Switch>
+            </Router>
           </div>
-        </Provider>
+        </LocaleProvider>
       </div>
     );
   }
