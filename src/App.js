@@ -14,9 +14,6 @@ import en_US from 'antd/lib/locale-provider/en_US';
 import intl from 'react-intl-universal';
 import IntlPolyfill from "intl";
 
-
-
-
 import Home from './components/home'
 import Login from './components/login'
 import Register from './components/register'
