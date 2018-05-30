@@ -8,6 +8,8 @@ class BB extends Component {
       <div>
         <Button>{intl.get('lang_CN')}</Button>
         <Button>{intl.get('lang_CN')}</Button>        
+        <Button>{intl.get('lang_CN')}</Button>        
+        
       </div>
     )
   }
