@@ -7,8 +7,6 @@ class BB extends Component {
     return (
       <div>
         <Button>{intl.get('lang_CN')}</Button>
-        <Button>{intl.get('lang_CN')}</Button>        
-        <Button>{intl.get('lang_CN')}</Button>        
         
       </div>
     )
