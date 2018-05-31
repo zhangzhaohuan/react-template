@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const WITH_CREDENTIALS = true;
 const CONTENT_TYPE = 'Content-Type';
-const MULTIPART = 'multipart/form-data';
+// const MULTIPART = 'multipart/form-data';
 const URLENCODED = 'application/x-www-form-urlencoded';
 const HEADEERS = { 'Accept': 'application/json', [CONTENT_TYPE]: URLENCODED };
 
@@ -25,22 +25,21 @@ export async function request(method, url, params, opts) {
     const headers = Object.assign({}, HEADEERS, opts.headers);
     const withCredentials = opts.withCredentials || WITH_CREDENTIALS;
     // if (opts.multipart) delete headers[CONTENT_TYPE];
-    let query, data, config;
+    let query, config;
     config = {
         "method": method,
         "url": url,
         "headers": headers,
         "withCredentials": withCredentials
     }
-    if (method == 'GET') {
+    if (method === 'GET') {
         query = querystring.stringify(params);
-        const url_query = JSON.stringify(params) == "{}" ? url : `${url}?${query}`;
+        const url_query = JSON.stringify(params) === "{}" ? url : `${url}?${query}`;
         config = Object.assign(config, { "params": params }, { "url": url_query });
     } else {
         config = Object.assign(config, { "data": params })
     }
     const res = await axios(config);
-    // const rs = await res.json();
     return res;
 }
 
