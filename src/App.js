@@ -7,8 +7,8 @@ import { setCookie, getCookie } from 'common/cookie.js'
 
 // antd国际化配置
 import { LocaleProvider } from 'antd';
-import zh_CN from 'antd/lib/locale-provider/zh_CN';
-import en_US from 'antd/lib/locale-provider/en_US';
+// import zh_CN from 'antd/lib/locale-provider/zh_CN';
+// import en_US from 'antd/lib/locale-provider/en_US';
 
 // react-intl-universal国际化配置
 import intl from 'react-intl-universal';
