@@ -1,6 +1,5 @@
 /**
  * create by yinghui(张兆欢) in 2018/5/29
- * 
  */
 
 import querystring from 'querystring';
