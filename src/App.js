@@ -14,10 +14,12 @@ import { LocaleProvider } from 'antd';
 import intl from 'react-intl-universal';
 import IntlPolyfill from "intl";
 
-import Home from './components/home'
-import Login from './components/login'
-import Register from './components/register'
-import store from './store';
+// 按需加载
+import asyncComponent from 'common/asyncComponent';
+const Home = asyncComponent(() => import('./components/home'));
+const Login = asyncComponent(() => import('./components/login'));
+const Register = asyncComponent(() => import('./components/register'));
+
 import './App.css';
 import './App.less';
 import './App.scss';
