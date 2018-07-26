@@ -6,8 +6,6 @@ import { setCookie, getCookie } from 'common/cookie.js'
 
 const Option = Select.Option;
 
-@inject('intl')
-@observer
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -36,8 +34,6 @@ export default class Header extends Component {
     return (
       <div>
         <Select defaultValue={this.defaultLan} style={{ width: 120 }} onChange={this.changeLanguage}>
-          {/* <Option value="zh_CN">{intl.get('lang_CN')}</Option>
-                    <Option value="en_US">{intl.get('lang_US')}</Option> */}
           <Option value="zh-CN">中文</Option>
           <Option value="en-US">english</Option>
         </Select>

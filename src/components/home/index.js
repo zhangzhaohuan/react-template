@@ -6,12 +6,10 @@ import Top from './header'
 import Intluniversal from '../intl-universal'
 
 const { Footer, Sider, Content, Header } = Layout;
-@inject('intl')
-@observer
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.intl = this.props.intl;
   }
   render() {
     return (
