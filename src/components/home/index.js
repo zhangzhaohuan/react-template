@@ -5,7 +5,7 @@ import Test from '../test'
 import Top from './header'
 import Intluniversal from '../intl-universal'
 
-const { Footer, Sider, Content, Header } = Layout;
+const { Footer, Content, Header } = Layout;
 
 export default class Home extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class Home extends Component {
             <Top history={this.props.history} />
           </Header>
           <Content>
-            <Test />
+            {/* <Test /> */}
             <Intluniversal />
             <Pagination showSizeChanger onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
           </Content>

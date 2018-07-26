@@ -90,4 +90,8 @@ proxy: {
 
 ### axios请求的封装
 ### 国际化：react-intl和LocaleProvider配合cookie
+<<<<<<< HEAD
 ###
+=======
+###      
+>>>>>>> f60fd3df89f176cec6d2df64263ef47c70059b4e
