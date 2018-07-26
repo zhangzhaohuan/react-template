@@ -19,7 +19,7 @@ export default function asyncComponent(importComponent) {
       });
     }
     render() {
-      const Component = this.state.component;
+      const { Component } = this.state;
       return Component ? <Component {...this.props} /> : null;
     }
   }

@@ -15,15 +15,15 @@ class Todolist {
       }
     })
   }
-  autorun(){
+  autorun() {
     if (this.defaultVal === 'hunter') {
       console.log('welcome')
     }
   }
-  @computed get getInputLength () {
+  @computed get getInputLength() {
     return this.defaultVal.length
   }
-  @computed get getListData () {
+  @computed get getListData() {
     if (this.checked) {
       return this.todoData
     } else {
@@ -36,7 +36,7 @@ class Todolist {
       return val
     }
   }
-  @computed get setLeftStyle () {
+  @computed get setLeftStyle() {
     if (this.checked) {
       return {
         background: 'rgba(150, 150, 150, 0.5)'
@@ -47,22 +47,22 @@ class Todolist {
       }
     }
   }
-  @computed get setRightStyle () {
+  @computed get setRightStyle() {
     if (!this.checked) {
       return {
         background: 'rgba(150, 150, 150, 0.5)'
       }
     } else {
       return {
-        
+
       }
     }
   }
 
-  @action.bound handlerChange (event) {
+  @action.bound handlerChange(event) {
     this.defaultVal = event.target.value
   }
-  @action.bound addTodo (event) {
+  @action.bound addTodo(event) {
     if (event.keyCode === 13) {
       var data = {
         'data': event.target.value
@@ -73,10 +73,10 @@ class Todolist {
       return false
     }
   }
-  @action.bound handerToggleLeft () {
+  @action.bound handerToggleLeft() {
     this.checked = true
   }
-  @action.bound handerToggleRight () {
+  @action.bound handerToggleRight() {
     this.checked = false
   }
 }
