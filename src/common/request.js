@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const WITH_CREDENTIALS = true;
 const CONTENT_TYPE = 'Content-Type';
-const MULTIPART = 'multipart/form-data';
+// const MULTIPART = 'multipart/form-data';
 const URLENCODED = 'application/x-www-form-urlencoded';
 const HEADEERS = { 'Accept': 'application/json', [CONTENT_TYPE]: URLENCODED };
 
@@ -20,28 +20,27 @@ const HEADEERS = { 'Accept': 'application/json', [CONTENT_TYPE]: URLENCODED };
  * @param {object} opts 请求选项
  */
 export async function request(method, url, params, opts) {
-    opts = Object.assign({}, opts);
-    params = Object.assign({}, params);
-    const headers = Object.assign({}, HEADEERS, opts.headers);
-    const withCredentials = opts.withCredentials || WITH_CREDENTIALS;
-    // if (opts.multipart) delete headers[CONTENT_TYPE];
-    let query, data, config;
-    config = {
-        "method": method,
-        "url": url,
-        "headers": headers,
-        "withCredentials": withCredentials
-    }
-    if (method == 'GET') {
-        query = querystring.stringify(params);
-        const url_query = JSON.stringify(params) == "{}" ? url : `${url}?${query}`;
-        config = Object.assign(config, { "params": params }, { "url": url_query });
-    } else {
-        config = Object.assign(config, { "data": params })
-    }
-    const res = await axios(config);
-    // const rs = await res.json();
-    return res;
+  opts = Object.assign({}, opts);
+  params = Object.assign({}, params);
+  const headers = Object.assign({}, HEADEERS, opts.headers);
+  const withCredentials = opts.withCredentials || WITH_CREDENTIALS;
+  // if (opts.multipart) delete headers[CONTENT_TYPE];
+  let query, config;
+  config = {
+    "method": method,
+    "url": url,
+    "headers": headers,
+    "withCredentials": withCredentials
+  }
+  if (method === 'GET') {
+    query = querystring.stringify(params);
+    const url_query = JSON.stringify(params) === "{}" ? url : `${url}?${query}`;
+    config = Object.assign(config, { "params": params }, { "url": url_query });
+  } else {
+    config = Object.assign(config, { "data": params })
+  }
+  const res = await axios(config);
+  return res;
 }
 
 /**
@@ -49,7 +48,7 @@ export async function request(method, url, params, opts) {
  * @param {*} args 参数：url,param,opts
  */
 export function get(...args) {
-    return request('GET', ...args);
+  return request('GET', ...args);
 }
 
 /**
@@ -57,7 +56,7 @@ export function get(...args) {
  * @param {*} args 参数：url,param,opts
  */
 export function post(...args) {
-    return request('POST', ...args);
+  return request('POST', ...args);
 }
 
 

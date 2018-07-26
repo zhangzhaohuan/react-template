@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 export default class Register extends Component {
-    render() {
-        return (
-            <div>
-                Register
+  render() {
+    return (
+      <div>
+        Register
             </div>
-        )
-    }
+    )
+  }
 }
