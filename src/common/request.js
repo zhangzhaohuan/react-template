@@ -9,8 +9,8 @@ const WITH_CREDENTIALS = true;
 const CONTENT_TYPE = 'Content-Type';
 // const MULTIPART = 'multipart/form-data';
 // const URLENCODED = 'application/x-www-form-urlencoded';
-const URLENCODED = 'application/json;charset=UTF-8';
-const HEADEERS = { 'Accept': 'application/json', [CONTENT_TYPE]: URLENCODED };
+const JSON_CHARSET = 'application/json;charset=UTF-8';
+const HEADEERS = { 'Accept': 'application/json', [CONTENT_TYPE]: JSON_CHARSET };
 
 /**
  * 发起一个请求
@@ -35,10 +35,10 @@ export async function request(method, url, params, opts) {
   }
   switch (method) {
     case 'GET': query = querystring.stringify(params);
-                const url_query = JSON.stringify(params) === "{}" ? url : `${url}?${query}`;
-                config = Object.assign(config, { "params": params }); break;
-    case 'POST': config = Object.assign(config, { "data": params });  break;
-    case 'PUT': config = Object.assign(config, { "data": params });  break;    
+      const url_query = JSON.stringify(params) === "{}" ? url : `${url}?${query}`;
+      config = Object.assign(config, { "params": params }); break;
+    case 'POST': config = Object.assign(config, { "data": params }); break;
+    case 'PUT': config = Object.assign(config, { "data": params }); break;
     case 'DELETE': config = Object.assign(config, { "data": params }); break;
   }
   axios.interceptors.request.use(function (config) {
