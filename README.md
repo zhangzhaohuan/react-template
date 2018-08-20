@@ -2,9 +2,9 @@
 ### 技术选型
     * react+mobx+antd+react-intl
 ### less、sass支持
-  * 安装 less、less-load、sass-loader
+  * 安装 less、less-load、node-sass sass-loader
   ```
-  npm i less less-loader sass-loader -D
+  npm i less less-loader node-sass sass-loader -D
   ```
   * webpack.config.dev module中（214行）添加如下配置
 ```
