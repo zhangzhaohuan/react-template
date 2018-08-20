@@ -85,7 +85,7 @@ proxy: {
   * npm install json-server -g
   * 切换到mock数据的位置mock文件夹，执行
   ```
-  json-server --watch db.json -p 3001
+  json-server --watch src/mock/index -p 3001
   ```
 
 ### axios请求的封装
