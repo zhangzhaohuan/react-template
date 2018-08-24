@@ -1,6 +1,22 @@
 # react 项目模板
+### 项目启动
+```
+npm i
+npm start
+```
 ### 技术选型
     * react+mobx+antd+react-intl
+### 创建项目脚手架
+    * create react app 
+## create-react-app创建项目添加配置
+### 添加babel-polyfill:各种浏览器支持es6
+```
+npm i babel-polyfill
+// webpack.config.dev.js entry 中添加如下配置
+  require.resolve('babel-polyfill'),
+// webpack.config.prod.js entry 中添加如下配置
+  require.resolve('babel-polyfill'),
+```
 ### less、sass支持
   * 安装 less、less-load、sass-loader
   ```

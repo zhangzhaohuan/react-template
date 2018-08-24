@@ -56,7 +56,11 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: [
+    require.resolve('./polyfills'),
+    require.resolve('babel-polyfill'),
+    paths.appIndexJs
+  ],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -91,7 +95,7 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
       common: path.resolve(__dirname, '../src/common/'),
-      locales: path.resolve(__dirname, '../src/locales/'),      
+      locales: path.resolve(__dirname, '../src/locales/'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
