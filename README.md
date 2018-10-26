@@ -8,7 +8,7 @@ npm start
     * react+mobx+antd+react-intl
 ### 创建项目脚手架
     * create react app 
-## create-react-app创建项目添加配置
+## 在create-react-app中创建的项目添加配置
 ### 添加babel-polyfill:各种浏览器支持es6
 ```
 npm i babel-polyfill

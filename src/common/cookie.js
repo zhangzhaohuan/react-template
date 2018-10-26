@@ -29,7 +29,6 @@ export function removeCookie(name) {
   setCookie(name, 1, -1);    //-1表示昨天过期,系统自动删除
 }
 
-
 //判断是否登录成功
 export function isLogin() {
   let session = getCookie('session');
