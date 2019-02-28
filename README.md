@@ -7,7 +7,7 @@ npm start
 ### 技术选型
     * react+mobx+antd+react-intl
 ### 创建项目脚手架
-    * create react app 
+    * create react app @1.5.2
 ## 在create-react-app中创建的项目添加配置
 ### 添加babel-polyfill:各种浏览器支持es6
 ```
@@ -106,4 +106,4 @@ proxy: {
 
 ### axios请求的封装
 ### 国际化：react-intl和LocaleProvider配合cookie
-###  
+

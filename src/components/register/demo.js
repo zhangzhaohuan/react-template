@@ -11,14 +11,13 @@ const formTailLayout = {
   wrapperCol: { span: 8, offset: 4 },
 };
 
-class Demo extends Component {
+export default class Demo extends Component {
   state = {
     checkNick: false,
   };
 
   check = () => {
     this.props.form.validateFields(
-      { force: true },
       (err) => {
         if (!err) {
           console.info('success');
@@ -31,17 +30,19 @@ class Demo extends Component {
     this.setState({
       checkNick: e.target.checked,
     }, () => {
-      this.props.form.getFieldsValue(['nickname'], { force: true });
+      this.props.form.validateFields(['nickname'], { force: true });
     });
   }
+  handleChangeName = () => {
+    console.log();
+  }
+
 
   validateName = (rule, value, callback) => {
     console.log(rule);
     console.log(value);
-    const { getFieldsValue } = this.props.form;
-    console.log(getFieldsValue(['nickname']));
-
-    if (value === getFieldsValue(['nickname']).nickname) {
+    const { getFileValue } = this.props.form;
+    if(value===getFileValue('nickname')){
       callback('name和nickname相同');
     }
     callback();
@@ -53,7 +54,7 @@ class Demo extends Component {
       <div>
         <FormItem {...formItemLayout} label="Name">
           {getFieldDecorator('username', {
-            validateFirst: true,
+            // getValueFromEvent: function () { },
             rules: [
               {
                 required: true,
@@ -61,6 +62,7 @@ class Demo extends Component {
               },
               {
                 validator: this.validateName,
+                message: 'Please input your name',
               }
             ],
           })(
@@ -70,21 +72,21 @@ class Demo extends Component {
         <FormItem {...formItemLayout} label="Nickname">
           {getFieldDecorator('nickname', {
             rules: [{
-              required: true,
+              required: this.state.checkNick,
               message: 'Please input your nickname',
             }],
           })(
             <Input placeholder="Please input your nickname" />
           )}
         </FormItem>
-        {/* <FormItem {...formTailLayout}>
+        <FormItem {...formTailLayout}>
           <Checkbox
             checked={this.state.checkNick}
             onChange={this.handleChange}
           >
             Nickname is required
           </Checkbox>
-        </FormItem> */}
+        </FormItem>
         <FormItem {...formTailLayout}>
           <Button type="primary" onClick={this.check}>
             Check
@@ -94,6 +96,3 @@ class Demo extends Component {
     )
   }
 }
-
-const WrappedDemo = Form.create()(Demo);
-export default WrappedDemo
