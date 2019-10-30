@@ -53,16 +53,15 @@ const Antd = Loadable({
   loading: MyLoadingComponent
 });
 
-import './App.css';
-import './App.less';
-import './App.scss';
+// css module scc test
+import styles from './style/demo.module.scss';
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let lang;
     if (!getCookie('lang')) {
       lang = window.navigator.language;
@@ -121,6 +120,15 @@ class App extends Component {
               </div>
             </Router>
           </div>
+          <div className={styles.name}>
+            <div>
+              <div className={styles.age}>
+                css module
+            </div>
+            </div>
+          </div>
+          <div className='name'>css2 module </div>
+
         </LocaleProvider>
       </div >
     );
