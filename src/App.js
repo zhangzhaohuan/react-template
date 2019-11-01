@@ -7,15 +7,19 @@ import { MyLoadingComponent } from "./components/common/MyLoadingComponent";
 // antd国际化配置
 import { LocaleProvider } from 'antd';
 
+
+// react-intl-universal国际化配置
+import intl from 'react-intl-universal';
+import IntlPolyfill from "intl";
+
+// css module scc test
+import styles from './style/demo.module.scss';
+
 //antd国际化文件
 const antd_locales = {
   "zh_CN": require("antd/lib/locale-provider/zh_CN"),
   "en_US": require("antd/lib/locale-provider/en_US")
 }
-
-// react-intl-universal国际化配置
-import intl from 'react-intl-universal';
-import IntlPolyfill from "intl";
 
 //universal国际化文件
 const intl_locales = {
@@ -53,8 +57,7 @@ const Antd = Loadable({
   loading: MyLoadingComponent
 });
 
-// css module scc test
-import styles from './style/demo.module.scss';
+
 
 class App extends Component {
   constructor(props) {
