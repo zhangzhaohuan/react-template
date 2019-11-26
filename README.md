@@ -40,7 +40,7 @@ npm i babel-polyfill
   或者
   npm i babel-plugin-import --save-dev
   ```
-  * 打开webpack.config.dev添加 第149行
+  * 打开webpack.config.dev添加 第149行 并且在webpack.config.pro相似位置也添加
 ```
 plugins: [
 	["import", [{
